@@ -20,4 +20,17 @@ describe('counter slice tests', () => {
       value: 100,
     });
   });
+
+  it('should decrement by 1', () => {
+    expect(reducer({value: 3}, counterActions.DECREMENT())).toEqual({
+      value: 2,
+    });
+  });
+
+  it('should not decrement when value is 0', () => {
+    expect(reducer({value: 0}, counterActions.DECREMENT())).toEqual({
+      value: 0,
+    });
+  });
+
 });
