@@ -1,5 +1,5 @@
-import React from 'react';
-import {CustomButton} from '../components/Button';
+import React, {useCallback} from 'react';
+import {CustomButton} from '../components/CustomButton';
 import {CounterText} from '../components/CounterText';
 import {StyleSheet} from 'react-native';
 import {useAppSelector} from '../store/hooks/useAppSelector';
@@ -13,23 +13,26 @@ export const MainScreen = () => {
   const canIncrement = counter < 100;
   const canDecrement = counter > 0;
 
-  const handleIncrement = () => {
+  const handleIncrement = useCallback(() => {
     dispatch(counterActions.INCREMENT());
-  };
-  const handleDecrement = () => {
+  }, []);
+
+  const handleDecrement = useCallback(() => {
     dispatch(counterActions.DECREMENT());
-  };
+  }, []);
 
   return (
     <>
       <CounterText value={counter} />
       <CustomButton
+        autoClick
         disabled={!canIncrement}
         title={'Increment'}
         onPress={handleIncrement}
         style={styles.incrementButton}
       />
       <CustomButton
+        autoClick
         disabled={!canDecrement}
         title={'Decrement'}
         onPress={handleDecrement}
