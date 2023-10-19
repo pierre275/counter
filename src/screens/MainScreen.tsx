@@ -11,11 +11,14 @@ export const MainScreen = () => {
   const dispatch = useAppDispatch();
 
   const canIncrement = counter < 100;
+  const canDecrement = counter > 0;
 
   const handleIncrement = () => {
     dispatch(counterActions.INCREMENT());
   };
-  const handleDecrement = () => {};
+  const handleDecrement = () => {
+    dispatch(counterActions.DECREMENT());
+  };
 
   return (
     <>
@@ -26,7 +29,11 @@ export const MainScreen = () => {
         onPress={handleIncrement}
         style={styles.incrementButton}
       />
-      <CustomButton title={'Decrement'} onPress={handleDecrement} />
+      <CustomButton
+        disabled={!canDecrement}
+        title={'Decrement'}
+        onPress={handleDecrement}
+      />
     </>
   );
 };
